@@ -489,10 +489,10 @@
         ],
     ]);
     
-    $response = curl_exec($curl);
-    $err = curl_error($curl);
+    $response = curl_exec($curlGHL);
+    $err = curl_error($curlGHL);
     
-    curl_close($curl);
+    curl_close($curlGHL);
 
     // Data to send to the API
     $data = array(
