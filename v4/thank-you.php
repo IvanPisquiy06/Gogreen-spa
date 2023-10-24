@@ -473,21 +473,22 @@
     $apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhdGlvbl9pZCI6InV3VFRkTXFpNmZFdEhBYlVCV2JpIiwiY29tcGFueV9pZCI6IkI1ZkRGM0g3RmUwOVFCVlN3VFpoIiwidmVyc2lvbiI6MSwiaWF0IjoxNjcwODk3ODk5MDI1LCJzdWIiOiJBV202c1F1NEFUOEtMV0FRSWVrQSJ9.pojXDxMNlrg7U0rVZH-aetkzTQpSd0GmCOlvTeeoaWA";
     
     $curlGHL = curl_init();
-    
-    curl_setopt_array($curlGHL, [
-        CURLOPT_URL => "https://rest.gohighlevel.com/v1/contacts/",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "POST",
-        CURLOPT_POSTFIELDS => json_encode($apiPayload),
-        CURLOPT_HTTPHEADER => [
+
+    curl_setopt($curlGHL, CURLOPT_URL, "https://rest.gohighlevel.com/v1/contacts/");
+    curl_setopt($curlGHL, CURLOPT_POST, true);
+    curl_setopt($curlGHL, CURLOPT_POSTFIELDS, json_encode($apiPayload));
+    curl_setopt($curlGHL, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curlGHL, CURLOPT_HTTPHEADER, array(
             "Authorization: Bearer " . $apiKey,
             "Content-Type: application/json",
-        ],
-    ]);
+	));
+
+    curl_setopt_array($curlGHL, [
+		CURLOPT_ENCODING       => "",
+		CURLOPT_MAXREDIRS      => 10,
+		CURLOPT_TIMEOUT        => 80,
+		CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1
+	]);
     
     $response = curl_exec($curlGHL);
     $err = curl_error($curlGHL);
