@@ -470,7 +470,7 @@
     ];
     
     $apiPayload['customField'] = $customsFields;
-    $apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhdGlvbl9pZCI6InV3VFRkTXFpNmZFdEhBYlVCV2JpIiwiY29tcGFueV9pZCI6IkI1ZkRGM0g3RmUwOVFCVlN3VFpoIiwidmVyc2lvbiI6MSwiaWF0IjoxNjcwODk3ODk5MDI1LCJzdWIiOiJBV202c1F1NEFUOEtMV0FRSWVrQSJ9.pojXDxMNlrg7U0rVZH-aetkzTQpSd0GmCOlvTeeoaWA";
+    $apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhdGlvbl9pZCI6IldUWENtV1U3bFpZYjlKWHBwRkowIiwiY29tcGFueV9pZCI6Im5tQ1MwYUwzYlhKZ2pWem95UkttIiwidmVyc2lvbiI6MSwiaWF0IjoxNjg5ODczNDgwMjc5LCJzdWIiOiJ1c2VyX2lkIn0.k0ijGcMSPDd6qC9L2UzDhfcgfzLu0ZuLcFX6hpvLj2w";
     
     $curlGHL = curl_init();
 
