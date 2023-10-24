@@ -539,7 +539,7 @@
                                     <h3 class="form_box-question">¿Cuál es su código postal?</h3>
                                     <div class="form-group">
                                         <label style="visibility: hidden; position: absolute;" for="zip">Código postal</label>
-                                        <input id="zip" class="form-control zipcode" type="tel" name="zip_code" pattern="[0-9]{5}" title="Enter Your ZIP Code" maxlength="5" minlength="5" placeholder="Enter Your ZIP Code" value="" required>
+                                        <input id="zip" class="form-control zipcode" type="tel" name="zip_code" pattern="[0-9]{5}" title="Ingrese su código postal" maxlength="5" minlength="5" placeholder="Ingrese su código postal" value="" required>
                                         <div id="zip_code_error" class="form-error-message">Por favor ingrese un código postal Estado Unidense válido.</div>
                                     </div>
                                     <div class="row">

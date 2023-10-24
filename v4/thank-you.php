@@ -445,6 +445,55 @@
         $roofShade = 'NOT_SURE';
     };
 
+    $apiPayload = [
+        'email' => $email,
+        'phone' => $phone,
+        'firstName' => $firstName,
+        'lastName' => $lastName,
+        'postalCode' => $zip,
+        'address1' => $address,
+        'tags' => [
+            "Solar",
+            "lead",
+            "Spanish"
+        ]
+    ];
+    $customsFields = [
+        'h0yght2ZerZXMAdJ1N5T' => $ip_address,
+        '8ObcareCtSE3ABLgyxSY' => $ownHome,
+        'HThFMFdFDJbGVPjdpjWe' => $roofShade,
+        'F5ifICjtmsE50Nej5Kxf' => 'UNSURE',
+        'jFg3nQGXqF034joeNjI0' => $monthlyBill,
+        'SbYk1vFzluyep7WAqk5p' => $trustedForm,
+        '0JoNfKFeCPF1G5NRAqkn' => $provider,
+
+    ];
+    
+    $apiPayload['customField'] = $customsFields;
+    $apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhdGlvbl9pZCI6InV3VFRkTXFpNmZFdEhBYlVCV2JpIiwiY29tcGFueV9pZCI6IkI1ZkRGM0g3RmUwOVFCVlN3VFpoIiwidmVyc2lvbiI6MSwiaWF0IjoxNjcwODk3ODk5MDI1LCJzdWIiOiJBV202c1F1NEFUOEtMV0FRSWVrQSJ9.pojXDxMNlrg7U0rVZH-aetkzTQpSd0GmCOlvTeeoaWA";
+    
+    $curlGHL = curl_init();
+    
+    curl_setopt_array($curlGHL, [
+        CURLOPT_URL => "https://rest.gohighlevel.com/v1/contacts/",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => json_encode($apiPayload),
+        CURLOPT_HTTPHEADER => [
+            "Authorization: Bearer " . $apiKey,
+            "Content-Type: application/json",
+        ],
+    ]);
+    
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+    
+    curl_close($curl);
+
     // Data to send to the API
     $data = array(
         'apiId' => 'E154A88B87B442FAA2C4AF4B19827E0F',
@@ -454,8 +503,8 @@
         'jornayaLeadId' => '',
         'tcpa' => 'YES',
         'tcpaLanguage' => "I agree to Terms, Privacy, and consent to solar/home servicers to send marketing prerecorded messages and autodialed calls/texts to my phone number above even if it's on any do not call list. Consent is not a condition of purchase. You can opt-out at any time (see Terms). Message/data rates may apply.",
-        'webSiteUrl' => 'https://gogreenandsave.net/',
-        'urlConsent' => 'https://gogreenandsave.net/',
+        'webSiteUrl' => 'https://gogreenandsave.co/',
+        'urlConsent' => 'https://gogreenandsave.co/',
         'address' => $address,
         'zip' => $zip,
         'city' => '',
