@@ -196,10 +196,10 @@
                                     <img src="thank-you_files/thank-icon-1.png" class="img-fluid" alt="Icon" title="">
                                 </div>
                                 <div class="solar-power-icon-content">
-                                    <h3>Congratulations!</h3>
-                                    <p>You are one step closer to getting solar
-                                        panels installed on your home. One of our courteous experts will confirm
-                                        your information and review your eligibility.</p>
+                                    <h3>¡Felicitaciones!</h3>
+                                    <p>Estás un paso más cerca de conseguir energía solar
+                                        Paneles instalados en su hogar. Uno de nuestros amables expertos lo confirmará.
+                                        su información y revise su elegibilidad.</p>
                                 </div>
                             </div>
                         </div>
@@ -209,11 +209,11 @@
                                     <img src="thank-you_files/thank-icon-2.png" class="img-fluid" alt="Icon" title="">
                                 </div>
                                 <div class="solar-power-icon-content">
-                                    <h3>Answer Your Phone!</h3>
-                                    <p>www.solar-money-saver.com does not make
-                                        high-pressure sales calls - our main goal is to help you lower your
-                                        electric bill. We've matched you with several local installers, so get
-                                        ready.</p>
+                                    <h3>¡Contesta tu teléfono!</h3>
+                                    <p>www.solar-money-saver.com no hace
+                                        llamadas de ventas de alta presión: nuestro objetivo principal es ayudarlo a reducir su
+                                        recibo de la luz. Lo hemos emparejado con varios instaladores locales, así que consiga
+                                        listo.</p>
                                 </div>
                             </div>
                         </div>
@@ -223,10 +223,10 @@
                                     <img src="thank-you_files/thank-icon-3.png" class="img-fluid" alt="Icon" title="">
                                 </div>
                                 <div class="solar-power-icon-content">
-                                    <h3>Grab A Pen!</h3>
-                                    <p>You're moments away from a complete
-                                        savings &amp; cost breakdown. When our professionals call, make sure to
-                                        write down their quotes and ask any questions you may have.</p>
+                                <h3>¡Coge un bolígrafo!</h3>
+                                    <p>Estás a pocos minutos de una completa
+                                        ahorros y desglose de los costos. Cuando nuestros profesionales llamen, asegúrese de
+                                        anota sus citas y pregunta cualquier duda que tengas.</p>
                                 </div>
                             </div>
                         </div>
@@ -243,7 +243,7 @@
 
                 <div class="row">
                     <div class="footer-menu">
-                        <div class="form-group tcpa"> <label id="tcpa" class="pageid-tcpa"><input type="hidden" id="leadid_tcpa_disclosure"> By submitting your info, you authorize us and up to 4 of our <a href="https://homeimprovement.name/installer-list" target="_blank" rel="nofollow">Partner Solar Companies</a> to call you and send sms messages or text messages at your number. Your consent here is not based on a condition of purchase. </label> </div>
+                        <div class="form-group tcpa"> <label id="tcpa" class="pageid-tcpa"><input type="hidden" id="leadid_tcpa_disclosure"> Al enviar su información, nos autoriza a nosotros y a hasta 4 de nuestros<a href="https://homeimprovement.name/installer-list" target="_blank" rel="nofollow">Empresas solares asociadas</a> para llamarlo y enviarle mensajes SMS o mensajes de texto a su número. Su consentimiento aquí no se basa en una condición de compra.</label> </div>
                     </div>
                 </div>
             </div>
@@ -428,6 +428,10 @@
     $roofShade = $_POST['roof_shade'];
     $ip_address = $_SERVER['REMOTE_ADDR'];
     $clickId = $_POST['click_id'];
+    $firstName = $_POST['first_name'];
+    $lastName = $_POST['last_name'];
+    $email = $_POST['email_address'];
+    $phone = $_POST['phone_home'];
 
     if($ownHome === 'Own'){
         $ownHome = 'YES';
@@ -445,7 +449,7 @@
         $roofShade = 'NOT_SURE';
     };
 
-    $apiPayload = [
+    $apiPayload = array(
         'email' => $email,
         'phone' => $phone,
         'firstName' => $firstName,
@@ -457,8 +461,8 @@
             "lead",
             "Spanish"
         ]
-    ];
-    $customsFields = [
+        );
+    $customsFields = array(
         'h0yght2ZerZXMAdJ1N5T' => $ip_address,
         '8ObcareCtSE3ABLgyxSY' => $ownHome,
         'HThFMFdFDJbGVPjdpjWe' => $roofShade,
@@ -467,7 +471,7 @@
         'SbYk1vFzluyep7WAqk5p' => $trustedForm,
         '0JoNfKFeCPF1G5NRAqkn' => $provider,
 
-    ];
+    );
     
     $apiPayload['customField'] = $customsFields;
     $apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhdGlvbl9pZCI6IldUWENtV1U3bFpZYjlKWHBwRkowIiwiY29tcGFueV9pZCI6Im5tQ1MwYUwzYlhKZ2pWem95UkttIiwidmVyc2lvbiI6MSwiaWF0IjoxNjg5ODczNDgwMjc5LCJzdWIiOiJ1c2VyX2lkIn0.k0ijGcMSPDd6qC9L2UzDhfcgfzLu0ZuLcFX6hpvLj2w";
@@ -490,9 +494,8 @@
 		CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1
 	]);
     
-    $response = curl_exec($curlGHL);
-    $err = curl_error($curlGHL);
-    
+    $responseGHL = curl_exec($curlGHL);
+    echo $responseGHL;
     curl_close($curlGHL);
 
     // Data to send to the API
@@ -600,11 +603,6 @@
     curl_close($curlEver);
 
     $urlPost = 'https://leads-inst338-client.phonexa.com/post/';
-
-    $firstName = $_POST['first_name'];
-    $lastName = $_POST['last_name'];
-    $email = $_POST['email_address'];
-    $phone = $_POST['phone_home'];
     
     // Data to send to the API
     $dataPost = array(
