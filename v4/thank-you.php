@@ -495,7 +495,6 @@
 	]);
     
     $responseGHL = curl_exec($curlGHL);
-    echo $responseGHL;
     curl_close($curlGHL);
 
     // Data to send to the API
