@@ -428,6 +428,10 @@
     $roofShade = $_POST['roof_shade'];
     $ip_address = $_SERVER['REMOTE_ADDR'];
     $clickId = $_POST['click_id'];
+    $firstName = $_POST['first_name'];
+    $lastName = $_POST['last_name'];
+    $email = $_POST['email_address'];
+    $phone = $_POST['phone_home'];
 
     if($ownHome === 'Own'){
         $ownHome = 'YES';
@@ -444,6 +448,54 @@
     }elseif ($roofShade === 'Uncertain') {
         $roofShade = 'NOT_SURE';
     };
+
+	$apiPayload = array(
+        'email' => $email,
+        'phone' => $phone,
+        'firstName' => $firstName,
+        'lastName' => $lastName,
+        'postalCode' => $zip,
+        'address1' => $address,
+        'tags' => [
+            "Solar",
+            "lead",
+            "Spanish"
+        ]
+        );
+    $customsFields = array(
+        'h0yght2ZerZXMAdJ1N5T' => $ip_address,
+        '8ObcareCtSE3ABLgyxSY' => $ownHome,
+        'HThFMFdFDJbGVPjdpjWe' => $roofShade,
+        'F5ifICjtmsE50Nej5Kxf' => 'UNSURE',
+        'jFg3nQGXqF034joeNjI0' => $monthlyBill,
+        'SbYk1vFzluyep7WAqk5p' => $trustedForm,
+        '0JoNfKFeCPF1G5NRAqkn' => $provider,
+
+    );
+    
+    $apiPayload['customField'] = $customsFields;
+    $apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhdGlvbl9pZCI6IldUWENtV1U3bFpZYjlKWHBwRkowIiwiY29tcGFueV9pZCI6Im5tQ1MwYUwzYlhKZ2pWem95UkttIiwidmVyc2lvbiI6MSwiaWF0IjoxNjg5ODczNDgwMjc5LCJzdWIiOiJ1c2VyX2lkIn0.k0ijGcMSPDd6qC9L2UzDhfcgfzLu0ZuLcFX6hpvLj2w";
+    
+    $curlGHL = curl_init();
+
+    curl_setopt($curlGHL, CURLOPT_URL, "https://rest.gohighlevel.com/v1/contacts/");
+    curl_setopt($curlGHL, CURLOPT_POST, true);
+    curl_setopt($curlGHL, CURLOPT_POSTFIELDS, json_encode($apiPayload));
+    curl_setopt($curlGHL, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curlGHL, CURLOPT_HTTPHEADER, array(
+            "Authorization: Bearer " . $apiKey,
+            "Content-Type: application/json",
+	));
+
+    curl_setopt_array($curlGHL, [
+		CURLOPT_ENCODING       => "",
+		CURLOPT_MAXREDIRS      => 10,
+		CURLOPT_TIMEOUT        => 80,
+		CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1
+	]);
+    
+    $responseGHL = curl_exec($curlGHL);
+    curl_close($curlGHL);
 
     // Data to send to the API
     $data = array(
@@ -550,11 +602,6 @@
     curl_close($curlEver);
 
     $urlPost = 'https://leads-inst338-client.phonexa.com/post/';
-
-    $firstName = $_POST['first_name'];
-    $lastName = $_POST['last_name'];
-    $email = $_POST['email_address'];
-    $phone = $_POST['phone_home'];
     
     // Data to send to the API
     $dataPost = array(
